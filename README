@@ -1,0 +1,8 @@
+#Study buddy networking for SilverStripe#
+
+Supports:
+* User profiles
+* User relationship management (buddies)
+* Search for a new buddy (based on profile)
+
+Requires TagField module (https://github.com/chillu/silverstripe-tagfield)
