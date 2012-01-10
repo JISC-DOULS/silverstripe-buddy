@@ -116,7 +116,7 @@ class BuddySearches extends Page_Controller {
                 'Error deleting search record'));
         } else {
             BuddyActionMessage::setMessage('search', _t('BUDDY.searchdelok',
-                'Saved search deleted.', BuddyActionMessage::MESSAGE_SUCCESS));
+                'Saved search deleted.'), BuddyActionMessage::MESSAGE_SUCCESS);
         }
         $this->redirectBack();
     }
@@ -308,14 +308,11 @@ class BuddySearches extends Page_Controller {
     public function inviteForm() {
         $fields = new FieldSet(array(
             new TextareaField('invitemsg', _t('BUDDY.search_invitemsg', 'Invite message'), 12),
-            new LiteralField('invitevalmsg', '<label for="Form_inviteForm_invitemsg" style="display:none">' .
-                _t('BUDDY.search_invitemsg', 'Invite message').'</label>')
         ));
         $actions = new FieldSet(array(
             new FormAction('invite', _t('BUDDY.search_invitesub', 'Invite'))
         ));
-        $validator = new RequiredFields('invitemsg');
-        return new Form($this, 'inviteForm', $fields, $actions, $validator);
+        return new Form($this, 'inviteForm', $fields, $actions);
     }
 
     /**
@@ -327,13 +324,11 @@ class BuddySearches extends Page_Controller {
         //TODO - need to double check permission that user can add a buddy?
         $success = true;
         $errors = 0;
-        $numinvites = 0;
         //Get all member buddies in form
         foreach($data as $key => $value) {
             if (strpos($key, self::$inviteprefix) === 0) {
                 $id = intval(substr($key, strlen(self::$inviteprefix)));
                 if ($value == self::inviteHash($id)) {
-                    $numinvites++;
                     //User hasn't spoofed request - call buddy add code (this checks data etc)
                     if (!Buddy::inviteRequest($id, $data['invitemsg'])) {
                         $success = false;
@@ -343,16 +338,12 @@ class BuddySearches extends Page_Controller {
             }
         }
         //Add a feedback message
-        if ($numinvites > 0 && $success) {
+        if ($success) {
             BuddyActionMessage::setMessage('search', _t('BUDDY.inviteok', 'Invitations sent successfully.'),
                 BuddyActionMessage::MESSAGE_SUCCESS);
         } else {
-            if ($numinvites == 0) {
-                $msg = _t('BUDDY.invitefailnone', 'No users selected for invitation.');
-            } else {
-                $msg = _t('BUDDY.invitefail', 'Failed to send %d invitations.');
-                $msg = sprintf($msg, $errors);
-            }
+            $msg = _t('BUDDY.invitefail', 'Failed to send %d invitations.');
+            $msg = sprintf($msg, $errors);
             BuddyActionMessage::setMessage('search', $msg);
         }
         //Redirect to search or buddies?
