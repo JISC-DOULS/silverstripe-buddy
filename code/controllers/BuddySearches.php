@@ -144,7 +144,7 @@ class BuddySearches extends Page_Controller {
             array(
                 //$tagField,
                 new StudyChoiceField('study', _t('BUDDY.searchstudy', 'Study choice')),
-                new DropdownField('studydrop', _t('BUDDY.searchstudydrop', 'Match'), $studychoice),
+                new DropdownField('studydrop', _t('BUDDY.searchstudydrop', 'Match study choice'), $studychoice),
                 new CheckboxSetField('interests', _t('BUDDY.search', 'Subjects'), $sourcemap),
                 new DropdownField('interestdrop',
                     _t('BUDDY.interestdrop', 'Has an interest in subjects selected'), $interestchoice),
