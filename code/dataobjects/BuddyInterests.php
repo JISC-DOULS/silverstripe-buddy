@@ -96,7 +96,7 @@ class BuddyInterests extends DataObject {
             //stackoverflow.com/questions/333750/fetching-only-rows-that-match-all-entries-in-a-joined-table-sql
             $having = "SUM(CASE WHEN COALESCE(ints.BuddyInterestsID, 0) IN ($intids)
                 THEN 1 ELSE 0 END) = ". count($interestids);
-            if ($anyall = 2) {
+            if ($anyall == 2) {
                 //Make sure they only have selected interests e.g. num matches must = num searched for
                 $having .= ' AND COUNT(*) = ' . count($interestids);
             }
