@@ -210,7 +210,7 @@ class Buddies extends Page_Controller {
     public function doAccept($data, $form) {
         if($accept = Buddy::updateBuddyInvite($data['id'], Member::currentUserID(),
             Buddy::RELATIONSHIP_CONFIRMED)) {
-            $successmsg = $accept->Initiator->getName();
+            $successmsg = $accept->getInitiatorName();
             $successmsg .= _t('BUDDY.buddyaccepted', ' has been accepted as your Buddy');
             BuddyActionMessage::setMessage('buddies', $successmsg, BuddyActionMessage::MESSAGE_SUCCESS);
         } else {
@@ -227,7 +227,7 @@ class Buddies extends Page_Controller {
     public function doReject($data, $form) {
         if($accept = Buddy::updateBuddyInvite($data['id'], Member::currentUserID(),
             Buddy::RELATIONSHIP_REJECTED)) {
-            $successmsg = $accept->Initiator->getName();
+            $successmsg = $accept->getInitiatorName();
             $successmsg .= _t('BUDDY.buddyrejected', ' has been rejected as your Buddy');
             BuddyActionMessage::setMessage('buddies', $successmsg, BuddyActionMessage::MESSAGE_SUCCESS);
         } else {
