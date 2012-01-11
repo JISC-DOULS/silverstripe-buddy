@@ -25,7 +25,7 @@
     </td>
     <td>$getName.XML</td>
     <% end_control %>
-    <td>$Created.Nice</td>
+    <td>$LastEdited.Nice</td>
     <td>
     $getInviteSummary(50)
     <% if getInviteSummaryIsChopped(50) %>

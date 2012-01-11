@@ -26,7 +26,7 @@
     </td>
     <td>$getName.XML</td>
     <% end_control %>
-    <td>$Created.Nice</td>
+    <td>$LastEdited.Nice</td>
     <td>
     <%-- summary --%>
     $getInviteSummary(50)
